@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feed Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #feed {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 0;
+        list-style: none;
+      }
+      .feed-item {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+      .feed-item h2 {
+        margin: 0 0 5px;
+      }
+      .feed-item p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Feed</h1>
+    <ul id="feed"></ul>
+
+    <script type="module">
+      import { getFeedItems, createNewPost } from "./data.js";
+      const feedItems = getFeedItems();
+
+      const feedContainer = document.getElementById("feed");
+      feedItems.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "feed-item";
+        li.innerHTML = `
+          <h2>${item.title}</h2>
+          <p>${item.description}</p>
+          `;
+        feedContainer.appendChild(li);
+      });
+
+      setInterval(() => createNewPost(feedItems.length), 10000);
+    </script>
+  </body>
+</html>
