@@ -15,10 +15,15 @@ export interface FeedConfig {
   weights: Record<InteractionAction, number>;
 }
 
-export type InteractionAction = "click" | "like";
+export type InteractionAction = "click" | "like" | "dislike" | "view";
+
+type UserProfileInterests = {
+  tags: { [tag: string]: number };
+  creators: { [userIdentifier: string]: number };
+};
 
 export interface UserProfile {
-  interests: { [tag: string]: number };
+  interests: UserProfileInterests;
   interactions: Array<{
     itemID: string;
     action: InteractionAction;
